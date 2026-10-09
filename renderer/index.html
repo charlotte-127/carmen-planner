@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carmen Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="drag" aria-hidden="true"></div>
+
+  <!-- First run: choose how to start -->
+  <section id="welcome" class="welcome" hidden>
+    <div class="welcome-inner">
+      <div class="mark" aria-hidden="true"><span></span></div>
+      <h1>Your Canvas, turned into a plan for the week.</h1>
+      <p class="lede">Sign in to Carmen the way you always do. Carmen Planner reads your courses and due dates, lists what is due this week, and spreads the work across your evenings.</p>
+      <div class="welcome-actions">
+        <button class="btn primary big" id="w-signin">Sign in to Carmen</button>
+        <button class="btn big" id="w-demo">Try it with sample courses</button>
+      </div>
+      <p class="fine">Your password goes only to Ohio State’s sign-in page. Everything the app reads stays on this computer.</p>
+      <button class="link" id="w-address">Using a different Canvas? Change the address</button>
+    </div>
+  </section>
+
+  <!-- Main app -->
+  <div id="app" class="app" hidden>
+    <aside class="side">
+      <div class="brand">
+        <div class="mark small" aria-hidden="true"><span></span></div>
+        <div>
+          <div class="brand-name">Carmen Planner</div>
+          <div class="brand-sub" id="source-line"></div>
+        </div>
+      </div>
+
+      <nav class="weeknav" aria-label="Choose week">
+        <button class="icon-btn" id="prev-week" aria-label="Previous week">‹</button>
+        <button class="week-label" id="this-week" title="Go to this week"></button>
+        <button class="icon-btn" id="next-week" aria-label="Next week">›</button>
+      </nav>
+
+      <div class="side-block">
+        <h3>Courses</h3>
+        <ul class="courses" id="course-list"></ul>
+      </div>
+
+      <div class="side-block stats" id="stats"></div>
+
+      <div class="side-foot">
+        <button class="btn" id="refresh">Refresh from Canvas</button>
+        <button class="btn ghost" id="open-settings">Settings</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="ahead" aria-labelledby="ahead-title">
+        <div class="section-head">
+          <h2 id="ahead-title">Next 2 weeks</h2>
+          <p class="hint">Exams and big assignments, with the day to start preparing.</p>
+        </div>
+        <div id="ahead"></div>
+      </section>
+
+      <section class="plan" aria-labelledby="plan-title">
+        <div class="section-head">
+          <h2 id="plan-title">Study plan</h2>
+          <p class="hint" id="plan-hint"></p>
+        </div>
+        <div id="notices"></div>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+
+    <aside class="right">
+      <section class="tasks" aria-labelledby="tasks-title">
+        <div class="section-head">
+          <h2 id="tasks-title">Due this week</h2>
+          <p class="hint" id="tasks-count"></p>
+        </div>
+        <div id="tasks"></div>
+      </section>
+
+      <section class="brief" aria-labelledby="brief-title">
+        <div class="section-head">
+          <h2 id="brief-title">Weekly brief</h2>
+          <span class="tag" id="brief-tag">AI</span>
+        </div>
+        <div id="brief"></div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Syncing overlay -->
+  <div id="busy" class="busy" hidden>
+    <div class="busy-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="busy-text">Reading Canvas…</p>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <dialog id="settings" class="sheet">
+    <form method="dialog" id="settings-form">
+      <header class="sheet-head">
+        <h2>Settings</h2>
+        <button class="icon-btn" value="cancel" aria-label="Close">×</button>
+      </header>
+
+      <fieldset>
+        <legend>Your study time</legend>
+        <div class="row2">
+          <label>Hours on weekdays
+            <input type="number" id="s-weekday" min="0" max="12" step="0.5" />
+          </label>
+          <label>Hours on weekends
+            <input type="number" id="s-weekend" min="0" max="12" step="0.5" />
+          </label>
+        </div>
+        <div class="row2">
+          <label>Usually start at
+            <input type="time" id="s-start" />
+          </label>
+          <label>Day off
+            <select id="s-rest">
+              <option value="none">No day off</option>
+              <option value="sat">Saturday</option>
+              <option value="sun">Sunday</option>
+            </select>
+          </label>
+        </div>
+        <label>I work
+          <select id="s-pace">
+            <option value="0.8">Faster than average</option>
+            <option value="1">At an average pace</option>
+            <option value="1.25">Slower, I like extra time</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Claude API key (optional)</legend>
+        <p class="help">Without a key, the plan is made on this computer for free. With a key, you also get an AI weekly brief. The key is encrypted and stays on this computer. <button type="button" class="link" id="key-help">Where do I get one?</button></p>
+        <div class="key-row" id="key-row"></div>
+        <label>Model
+          <input type="text" id="s-model" spellcheck="false" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Canvas</legend>
+        <label>Canvas address
+          <input type="url" id="s-base" spellcheck="false" />
+        </label>
+        <div class="row-actions">
+          <button type="button" class="btn" id="s-demo">Switch to sample courses</button>
+          <button type="button" class="btn danger" id="s-signout">Sign out and clear data</button>
+        </div>
+      </fieldset>
+
+      <p class="error" id="s-error" role="alert"></p>
+      <footer class="sheet-foot">
+        <span class="version" id="version"></span>
+        <button class="btn primary" id="s-save" value="save">Save settings</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="planner.js"></script>
+  <script src="demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

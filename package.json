@@ -1,0 +1,72 @@
+{
+  "name": "carmen-planner",
+  "version": "1.0.0",
+  "description": "Turns your Carmen Canvas courses into a weekly task list and study plan. Desktop app for Mac and Windows.",
+  "main": "main.js",
+  "author": "Charlotte",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/planner.test.js",
+    "dist:mac": "electron-builder --mac --universal --publish never",
+    "dist:win": "electron-builder --win --x64 --publish never",
+    "dist": "electron-builder --mac --universal --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.example.carmenplanner",
+    "productName": "Carmen Planner",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*"
+    ],
+    "artifactName": "Carmen-Planner-${os}-${arch}.${ext}",
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "build/icon.png",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "Carmen Planner"
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Carmen Planner"
+    },
+    "afterPack": "build/afterPack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charlotte-127/carmen-planner.git"
+  }
+}

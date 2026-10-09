@@ -1,0 +1,63 @@
+# Builds the Mac (.dmg, Apple silicon + Intel) and Windows (.exe) installers.
+#
+# Run it by hand:  GitHub repo -> Actions -> "Build installers" -> Run workflow.
+#                  The installers appear under that run's "Artifacts".
+# Make a release:  push a tag like v1.0.0. The installers are attached to a
+#                  GitHub Release automatically, ready for people to download.
+
+name: Build installers
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            script: dist:mac
+            files: dist/*.dmg
+          - os: windows-latest
+            script: dist:win
+            files: dist/*.exe
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm install
+
+      - name: Test the planner
+        run: npm test
+
+      - name: Build installer
+        run: npm run ${{ matrix.script }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+      - name: Save installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.os }}
+          path: ${{ matrix.files }}
+          if-no-files-found: error
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.files }}
+          draft: false
