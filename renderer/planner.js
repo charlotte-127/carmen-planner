@@ -86,7 +86,8 @@
         kind: cls.kind,
         hours: roundQ(cls.hours * (+s.pace || 1)),
         urgency: urgencyOf(diff),
-        heavy: cls.kind === 'exam' || cls.kind === 'project' || (a.points || 0) >= 100,
+        // big items: exams, projects/papers, and unusually large homework (not readings or quizzes)
+        heavy: cls.kind === 'exam' || cls.kind === 'project' || (cls.kind === 'homework' && (a.points || 0) >= 100),
         done: doneSet ? doneSet.has(key) : false,
       });
     });
@@ -234,7 +235,7 @@
     return mm ? `${hh} h ${mm} min` : `${hh} h`;
   }
 
-  const api = { HEADS_UP_DAYS, HORIZON, build, classify, dkey, addDays, startOfDay, mondayOf, dayDiff, fmtTime, fmtRange, fmtHours };
+  const api = { HEADS_UP_DAYS, HORIZON, build, classify, capacity, dkey, addDays, startOfDay, mondayOf, dayDiff, fmtTime, fmtRange, fmtHours };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Planner = api;
 })(typeof window !== 'undefined' ? window : globalThis);

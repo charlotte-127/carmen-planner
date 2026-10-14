@@ -1,13 +1,13 @@
 {
   "name": "carmen-planner",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turns your Carmen Canvas courses into a weekly task list and study plan. Desktop app for Mac and Windows.",
   "main": "main.js",
   "author": "Charlotte",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "test": "node test/planner.test.js",
+    "test": "node test/planner.test.js && node test/syllabus.test.js && node test/brief.test.js && node test/contacts.test.js",
     "dist:mac": "electron-builder --mac --universal --publish never",
     "dist:win": "electron-builder --win --x64 --publish never",
     "dist": "electron-builder --mac --universal --win --x64 --publish never"

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carmen Planner</title>
-  <meta name="description" content="A free Mac and Windows app that turns your Carmen Canvas courses into a weekly task list and study plan." />
+  <meta name="description" content="A free Mac and Windows app that turns your Carmen Canvas courses into a weekly plan, a weekly brief, and a one-screen summary of every syllabus." />
   <meta property="og:title" content="Carmen Planner" />
   <meta property="og:description" content="Know what's due. Know when to start. A free study planner for Ohio State students." />
   <meta property="og:image" content="img/screenshot-light.png" />
@@ -142,6 +142,7 @@
     .privacy div { border-top: 1px solid var(--line); padding: 18px 0; }
     .privacy b { display: block; font-size: 17px; margin-bottom: 4px; }
     .privacy span { color: var(--ink-2); font-size: 16px; }
+    .privacy span a { color: var(--scarlet); }
 
     .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px; }
     .os-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; gap: 18px; }
@@ -159,6 +160,53 @@
     .story b { display: block; margin-bottom: 6px; font-size: 17px; }
     .story p { color: var(--ink-2); font-size: 15.5px; }
 
+
+    /* syllabus demo */
+    .split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: start; margin-top: 36px; }
+    .dm-demo { background: var(--panel); border: 2px solid var(--scarlet); border-radius: 16px; padding: 24px 26px 18px; }
+    .dm-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .dm-head b { font-size: 26px; font-weight: 800; color: var(--scarlet-deep); letter-spacing: -0.01em; }
+    .dm-head span { color: var(--ink-3); font-size: 14px; }
+    .dm-lab { font-size: 13px; font-weight: 700; margin: 16px 0 6px; display: flex; gap: 8px; align-items: center; }
+    .dm-lab::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    .dm-lab.less { color: #2f7d4f; }
+    .dm-lab.risk { color: var(--scarlet); }
+    .dm-demo p { margin: 0; padding: 8px 10px; border-radius: 8px; font-size: 16px; }
+    .dm-demo p:nth-of-type(odd) { background: var(--line-2); }
+    .dm-demo mark { background: linear-gradient(transparent 52%, #ffe58f 52%); color: inherit; font-weight: 650; }
+    .people-demo { margin-top: 44px; }
+    .people-demo h3 { font-size: 22px; margin: 0 0 6px; letter-spacing: -0.01em; }
+    .people-demo .sub2 { color: var(--ink-2); font-size: 16px; margin: 0 0 18px; max-width: 46em; }
+    .pweek { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .pday { background: var(--scarlet-wash, #fbe9ec); border-radius: 10px; padding: 10px 12px; font-size: 14px; display: grid; gap: 2px; align-content: start; }
+    .pday b { font-size: 15px; }
+    .pday small { color: var(--ink-2); font-size: 13px; }
+    .pcards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .pcard { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--scarlet); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; font-size: 15px; }
+    .pcard.ta { border-left-color: var(--ink-3); }
+    .pcard .prole { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--scarlet-deep); }
+    .pcard.ta .prole { color: var(--ink-2); }
+    .pcard .pname { font-size: 17px; font-weight: 700; margin-left: 6px; }
+    .prow { display: grid; grid-template-columns: 104px 1fr; gap: 8px; }
+    .prow span:first-child { color: var(--ink-3); }
+    .pmail { color: var(--scarlet); text-decoration: underline; }
+    @media (max-width: 700px) { .pcards, .pweek { grid-template-columns: 1fr; } }
+    .points { display: grid; gap: 0; }
+    .points div { border-top: 1px solid var(--line); padding: 16px 0; }
+    .points b { display: block; font-size: 17px; margin-bottom: 4px; }
+    .points span { color: var(--ink-2); font-size: 16px; }
+    /* theme strip */
+    .theme-strip { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 10px; margin-top: 30px; }
+    .tcard { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); }
+    .tprev { height: 74px; position: relative; }
+    .tpanel { position: absolute; left: 10px; top: 12px; width: 62%; bottom: 0; border-radius: 6px 6px 0 0; }
+    .tline { position: absolute; left: 18px; height: 6px; border-radius: 3px; }
+    .tbtn { position: absolute; right: 9px; bottom: 9px; width: 26px; height: 11px; border-radius: 6px; }
+    .tname { display: block; padding: 7px 9px 8px; font-size: 13px; font-weight: 600; }
+    @media (max-width: 960px) { .theme-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 24px; } }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dm-demo mark { background: linear-gradient(transparent 52%, rgba(250, 204, 21, .35) 52%); } }
+    :root[data-theme="dark"] .dm-demo mark { background: linear-gradient(transparent 52%, rgba(250, 204, 21, .35) 52%); }
     footer { margin-top: 110px; border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--ink-3); font-size: 14px; }
     footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
     footer a { color: var(--ink-2); }
@@ -196,7 +244,10 @@
       <a class="logo" href="#"><img src="img/icon.png" alt="" />Carmen Planner</a>
       <nav aria-label="Main">
         <a href="#features">Features</a>
-        <a href="#privacy">Privacy</a>
+        <a href="#syllabus">Syllabus</a>
+        <a href="#brief">Weekly brief</a>
+        <a href="#themes">Themes</a>
+        <a href="#safe">Is it safe?</a>
         <a href="#how">How I built it</a>
         <a class="gh-link" href="#">GitHub</a>
         <a class="nav-dl" href="#download">Download</a>
@@ -208,7 +259,7 @@
     <section class="hero">
       <div class="wrap">
         <h1>Know what’s due. <span>Know when to start.</span></h1>
-        <p class="lede">Carmen Planner is a free desktop app for Ohio State students. Sign in to Carmen, and it turns every course into one list of what’s due this week and a study plan that fits your evenings.</p>
+        <p class="lede">Carmen Planner is a free desktop app for Ohio State students. Sign in to Carmen, and it turns every course into one list of what’s due this week, a study plan that fits your evenings, a one-screen summary of each syllabus with every instructor’s and TA’s office hours, and a short brief for the week.</p>
         <div class="cta" id="hero-cta">
           <a class="btn primary dl-mac" href="#download">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.2zM14 5.1c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5z"/></svg>
@@ -235,8 +286,8 @@
 
     <section class="block" id="features">
       <div class="wrap">
-        <h2>Five courses, one plan.</h2>
-        <p class="sub">No more clicking through every course on Sunday night. Carmen Planner reads them all at once and lays out your week.</p>
+        <h2>Every course, one plan.</h2>
+        <p class="sub">Three courses or seven, it doesn’t matter. No more clicking through each one on Sunday night: Carmen Planner reads them all at once and lays out your week.</p>
         <div class="shot">
           <picture>
             <source srcset="img/screenshot-dark.png" media="(prefers-color-scheme: dark)" />
@@ -251,8 +302,8 @@
           </div>
           <div class="feature">
             <div class="mini" style="--w:62%"></div>
-            <h3>A study plan that fits</h3>
-            <p>Tell it how many hours you have and when you like to start. It spreads the work across the days before each deadline.</p>
+            <h3>A plan you can move</h3>
+            <p>It spreads the work across the days before each deadline. Then it works like a calendar: drag a block, stretch it, add a note, or click an empty spot to add your own plans.</p>
           </div>
           <div class="feature">
             <div class="mini" style="--w:100%"></div>
@@ -263,22 +314,87 @@
       </div>
     </section>
 
-    <section class="block">
+
+    <section class="block" id="syllabus">
       <div class="wrap">
-        <h2>An optional weekly brief from Claude.</h2>
+        <h2>The syllabus, without the fluff.</h2>
+        <p class="sub">Almost nobody reads every syllabus to the end, and that’s where the rules that save you work are hiding. Carmen Planner reads each one and puts those rules at the top, highlighted, along with who to contact and when their office hours are.</p>
+        <div class="split">
+          <div class="dm-demo" aria-label="Example syllabus summary">
+            <div class="dm-head"><b>Don’t miss</b><span>MATH 1151</span></div>
+            <div class="dm-lab less">You don’t have to do everything</div>
+            <p>Only your <mark>best 10 of 12 quiz scores count</mark> toward your grade.</p>
+            <p>Your <mark>lowest two WebAssign homework scores will be dropped</mark>.</p>
+            <p>The final exam score will <mark>replace your lowest midterm score</mark> if it’s higher.</p>
+            <div class="dm-lab risk">Watch out</div>
+            <p>There are <mark>no make-up quizzes</mark>.</p>
+          </div>
+          <div class="points">
+            <div><b>Reads the syllabus wherever it is</b><span>The Syllabus page in Carmen, a PDF or Word file the instructor uploaded, and pages like “Course Policies”. Missing a part? Pick the file and add it.</span></div>
+            <div><b>Finds the rules that matter</b><span>Dropped scores, “only 8 of 10 required”, free extensions, required labs, attendance limits, late penalties.</span></div>
+            <div><b>Skips the boilerplate</b><span>Standard university statements are left out and listed, so you know nothing was hidden.</span></div>
+            <div><b>Shows your grade breakdown</b><span>Homework, quizzes, exams and how much each one counts, at a glance.</span></div>
+          </div>
+        </div>
+        <div class="people-demo">
+          <h3>Who to ask, and when.</h3>
+          <p class="sub2">Every instructor and TA in one place: their email (one click to write), the days, times and room of their office hours, and whether you need an appointment. TAs the syllabus forgets are added from the course’s People list in Carmen.</p>
+          <div class="pweek" aria-label="Example: office hours by day">
+            <div class="pday"><b>Mon &amp; Wed</b>2 – 3:30 PM<small>Dr. Elena Rivera</small></div>
+            <div class="pday"><b>Thu</b>4 – 5 PM<small>Jordan Park (TA)</small></div>
+            <div class="pday"><b>Fri</b>1 – 2 PM<small>Mia Torres (TA) · book first</small></div>
+          </div>
+          <div class="pcards">
+            <div class="pcard"><div><span class="prole">Instructor</span><span class="pname">Dr. Elena Rivera</span></div>
+              <div class="prow"><span>Email</span><span class="pmail">rivera.42@example.edu</span></div>
+              <div class="prow"><span>Office hours</span><span><b>Mon &amp; Wed</b> 2 – 3:30 PM · Math Tower 412</span></div>
+              <div class="prow"><span>Appointment</span><span>Not needed during office hours. Other times by appointment.</span></div></div>
+            <div class="pcard ta"><div><span class="prole">TA</span><span class="pname">Jordan Park</span></div>
+              <div class="prow"><span>Email</span><span class="pmail">park.311@example.edu</span></div>
+              <div class="prow"><span>Office hours</span><span><b>Thu</b> 4 – 5 PM · Cockins Hall 132</span></div>
+              <div class="prow"><span>Appointment</span><span>No appointment needed. Just drop in.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="themes">
+      <div class="wrap">
+        <h2>Make it yours.</h2>
+        <p class="sub">Pick a color theme, including two cute ones, or put your own picture behind the app.</p>
+        <div class="theme-strip">
+          <div class="tcard"><div class="tprev" style="background-color:#f4f3f1;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #e2dfda"></span><span class="tline" style="top:22px;width:42%;background:#ba0c2f"></span><span class="tline" style="top:36px;width:30%;background:#2f5d8a"></span><span class="tline" style="top:50px;width:36%;background:#2f7d4f"></span><span class="tbtn" style="background:#ba0c2f"></span></div><span class="tname">Scarlet</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#121826;background-image:none;background-size:auto"><span class="tpanel" style="background:#1a2234;box-shadow:0 0 0 1px #2a3550"></span><span class="tline" style="top:22px;width:42%;background:#ff7b93"></span><span class="tline" style="top:36px;width:30%;background:#7fb0ff"></span><span class="tline" style="top:50px;width:36%;background:#62c99a"></span><span class="tbtn" style="background:#8fb0ff"></span></div><span class="tname">Midnight</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#eef4f8;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #d3e0ea"></span><span class="tline" style="top:22px;width:42%;background:#1f6fae"></span><span class="tline" style="top:36px;width:30%;background:#d9534f"></span><span class="tline" style="top:50px;width:36%;background:#2e8b6a"></span><span class="tbtn" style="background:#1f6fae"></span></div><span class="tname">Ocean</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#f1f4ee;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #d9e1d4"></span><span class="tline" style="top:22px;width:42%;background:#2f6b45"></span><span class="tline" style="top:36px;width:30%;background:#b5523b"></span><span class="tline" style="top:50px;width:36%;background:#3d6fa8"></span><span class="tbtn" style="background:#2f6b45"></span></div><span class="tname">Forest</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#f5f2fa;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #e3dcef"></span><span class="tline" style="top:22px;width:42%;background:#6c45b0"></span><span class="tline" style="top:36px;width:30%;background:#d1477a"></span><span class="tline" style="top:50px;width:36%;background:#3f86c4"></span><span class="tbtn" style="background:#6c45b0"></span></div><span class="tname">Lavender</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#fbf3ec;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #f0dccc"></span><span class="tline" style="top:22px;width:42%;background:#c2491f"></span><span class="tline" style="top:36px;width:30%;background:#3b6fb0"></span><span class="tline" style="top:50px;width:36%;background:#2e8a5f"></span><span class="tbtn" style="background:#c2491f"></span></div><span class="tname">Sunset</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#f2f2f2;background-image:none;background-size:auto"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #dcdcdc"></span><span class="tline" style="top:22px;width:42%;background:#2b2b2b"></span><span class="tline" style="top:36px;width:30%;background:#c0392b"></span><span class="tline" style="top:50px;width:36%;background:#2c6fb3"></span><span class="tbtn" style="background:#2b2b2b"></span></div><span class="tname">Graphite</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#fff1f4;background-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22150%22%20height%3D%22150%22%20viewBox%3D%220%200%20150%20150%22%3E%20%3Cg%20opacity%3D%220.38%22%3E%20%3Cpath%20d%3D%22M22%2034c-9-6-10-15-3-17%203-1%205%201%206%203%201-2%203-4%206-3%207%202%206%2011-3%2017l-3%202z%22%20fill%3D%22%23f7a6bc%22%2F%3E%20%3Cg%20transform%3D%22translate(96%2030)%20rotate(12)%22%3E%20%3Cpath%20d%3D%22M0%204c10%200%2015%207%2012%2016-2%207-7%2012-12%2015C-5%2032-10%2027-12%2020-15%2011-10%204%200%204z%22%20fill%3D%22%23f58aa7%22%2F%3E%20%3Cpath%20d%3D%22M-7%204l4-2%203-5%203%205%204%202-3%203h-8z%22%20fill%3D%22%2392d3a3%22%2F%3E%20%3Ccircle%20cx%3D%22-4%22%20cy%3D%2214%22%20r%3D%221.1%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%2212%22%20r%3D%221.1%22%20fill%3D%22%23fff%22%2F%3E%20%3Ccircle%20cx%3D%220%22%20cy%3D%2221%22%20r%3D%221.1%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2220%22%20r%3D%221.1%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%22-6%22%20cy%3D%2222%22%20r%3D%221.1%22%20fill%3D%22%23fff%22%2F%3E%20%3C%2Fg%3E%20%3Cpath%20d%3D%22M62%20112c-7-5-8-12-2-13%202%200%204%201%205%203%201-2%202-3%205-3%205%201%204%208-3%2013l-2%202z%22%20fill%3D%22%23fbc3d2%22%2F%3E%20%3Cg%20transform%3D%22translate(124%20112)%20rotate(-14)%20scale(.8)%22%3E%20%3Cpath%20d%3D%22M0%204c10%200%2015%207%2012%2016-2%207-7%2012-12%2015C-5%2032-10%2027-12%2020-15%2011-10%204%200%204z%22%20fill%3D%22%23f9a3bb%22%2F%3E%20%3Cpath%20d%3D%22M-7%204l4-2%203-5%203%205%204%202-3%203h-8z%22%20fill%3D%22%23a7dcb4%22%2F%3E%20%3C%2Fg%3E%20%3Ccircle%20cx%3D%2260%22%20cy%3D%2240%22%20r%3D%222.5%22%20fill%3D%22%23f9c4d2%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2296%22%20r%3D%222%22%20fill%3D%22%23f9c4d2%22%2F%3E%20%3Ccircle%20cx%3D%22104%22%20cy%3D%2278%22%20r%3D%222%22%20fill%3D%22%23fbd3de%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%22140%22%20r%3D%222.5%22%20fill%3D%22%23f9c4d2%22%2F%3E%20%3Cpath%20d%3D%22M140%2060l1.6%203.4%203.4%201.6-3.4%201.6L140%2070l-1.6-3.4-3.4-1.6%203.4-1.6z%22%20fill%3D%22%23ffd27a%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E');background-size:64px 64px"><span class="tpanel" style="background:#fffafb;box-shadow:0 0 0 1px #f6d3dc"></span><span class="tline" style="top:22px;width:42%;background:#d94b77"></span><span class="tline" style="top:36px;width:30%;background:#5b8fd6"></span><span class="tline" style="top:50px;width:36%;background:#3f9e7a"></span><span class="tbtn" style="background:#c93f6b"></span></div><span class="tname">Strawberry Milk</span></div>
+          <div class="tcard"><div class="tprev" style="background-color:#f6f1ff;background-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22180%22%20height%3D%22180%22%20viewBox%3D%220%200%20180%20180%22%3E%20%3Cg%20opacity%3D%220.6%22%3E%20%3Cg%20fill%3D%22%23ffffff%22%3E%20%3Ccircle%20cx%3D%2230%22%20cy%3D%2240%22%20r%3D%2211%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2234%22%20r%3D%2214%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2241%22%20r%3D%2210%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2240%22%20width%3D%2234%22%20height%3D%2211%22%20rx%3D%225.5%22%2F%3E%20%3C%2Fg%3E%20%3Cg%20fill%3D%22%23ffffff%22%20transform%3D%22translate(98%20120)%20scale(.8)%22%3E%20%3Ccircle%20cx%3D%2230%22%20cy%3D%2240%22%20r%3D%2211%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2234%22%20r%3D%2214%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2241%22%20r%3D%2210%22%2F%3E%3Crect%20x%3D%2228%22%20y%3D%2240%22%20width%3D%2234%22%20height%3D%2211%22%20rx%3D%225.5%22%2F%3E%20%3C%2Fg%3E%20%3Cpath%20d%3D%22M134%2030l3.5%207.2%207.9%201.1-5.7%205.6%201.3%207.9-7-3.7-7%203.7%201.3-7.9-5.7-5.6%207.9-1.1z%22%20fill%3D%22%23ffc8de%22%2F%3E%20%3Cpath%20d%3D%22M40%20128l2.6%205.3%205.9.9-4.3%204.1%201%205.9-5.2-2.8-5.2%202.8%201-5.9-4.3-4.1%205.9-.9z%22%20fill%3D%22%23c9d9ff%22%2F%3E%20%3Cpath%20d%3D%22M96%2076l1.8%204.2%204.2%201.8-4.2%201.8L96%2088l-1.8-4.2-4.2-1.8%204.2-1.8z%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Cpath%20d%3D%22M160%2096l1.4%203.1%203.1%201.4-3.1%201.4-1.4%203.1-1.4-3.1-3.1-1.4%203.1-1.4z%22%20fill%3D%22%23ffd6e8%22%2F%3E%20%3Ccircle%20cx%3D%2214%22%20cy%3D%2292%22%20r%3D%222.2%22%20fill%3D%22%23ffd6e8%22%2F%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%22160%22%20r%3D%222%22%20fill%3D%22%23c9d9ff%22%2F%3E%3Ccircle%20cx%3D%22168%22%20cy%3D%22160%22%20r%3D%222.4%22%20fill%3D%22%23ffffff%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E'), linear-gradient(160deg, #fde4f0 0%, #efe7ff 50%, #dfeaff 100%);background-size:64px 64px, cover"><span class="tpanel" style="background:#ffffff;box-shadow:0 0 0 1px #e4dcf5"></span><span class="tline" style="top:22px;width:42%;background:#d94b77"></span><span class="tline" style="top:36px;width:30%;background:#5b8fd6"></span><span class="tline" style="top:50px;width:36%;background:#3f9e7a"></span><span class="tbtn" style="background:#b8508a"></span></div><span class="tname">Cotton Candy</span></div>
+        </div>
+        <div class="shot">
+          <img src="img/app-strawberry.png" alt="Carmen Planner in the Strawberry Milk theme, showing a syllabus summary" loading="lazy" width="2720" height="1760" />
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="brief">
+      <div class="wrap">
+        <h2>A weekly brief, written for you.</h2>
         <div class="ai">
           <div class="copy">
-            <p>The plan is made on your computer for free and works without AI. If you add your own Claude API key in Settings, Claude also reads your due dates and syllabi and writes a short brief for the week.</p>
-            <p>It tells you what to do first, gives a note for each course, and points out crunch points, like two exams on back-to-back days.</p>
+            <p>Every week, Carmen Planner writes you a short brief from your plan: what kind of week it is, what to do first and why, where it gets tight, and a line for each course.</p>
+            <p>It also pulls in the syllabus rule that matters right now, like “your lowest quiz is dropped” in a quiz week. It’s all worked out on your computer, with no AI service, no account and no cost, and it updates as you check things off.</p>
           </div>
           <div class="ai-card" aria-label="Example weekly brief">
-            <div class="head">A front-loaded week: two exams and an essay draft land close together.</div>
+            <div class="head">A heavy week: Lab Report 4 on Wed, and prep starts for Essay 2 Draft, Exam 2 and 2 more.</div>
             <ul>
-              <li><b>Pre-Lab 5.</b> Due tonight and needed for tomorrow’s lab.</li>
-              <li><b>PSYCH Exam 2.</b> A practice set today shows which chapters need time.</li>
-              <li><b>Watch out:</b> PSYCH Exam 2 and MATH Midterm 2 are one day apart.</li>
+              <li><b>Pre-Lab 5: Titration.</b> Due today at 11:00 PM. About 1 h 30 min.</li>
+              <li><b>Watch out:</b> PSYCH 1100 Exam 2 (Sat) and MATH 1151 Midterm 2 (Sun) are back to back.</li>
+              <li><b>MATH 1151:</b> only your best 10 of 12 quiz scores count toward your grade.</li>
             </ul>
-            <p class="pep">Small sessions starting today beat one huge session on Sunday.</p>
+            <p class="pep">Start the big thing first while you’re fresh; the small things fit in the gaps.</p>
           </div>
         </div>
       </div>
@@ -288,7 +404,7 @@
       <div class="wrap">
         <h2>Your Carmen stays yours.</h2>
         <div class="privacy">
-          <div><b>You sign in yourself</b><span>The sign-in happens on Ohio State’s own page, with Duo, inside the app. The app never sees your password.</span></div>
+          <div><b>You sign in yourself</b><span>The sign-in happens on Ohio State’s own page, with Duo, inside the app. The app never sees your password. It can keep you signed in for up to 30 days; turn that off in Settings on a shared computer.</span></div>
           <div><b>Read only</b><span>It reads your courses and due dates. It never submits, edits or posts anything.</span></div>
           <div><b>Stays on your computer</b><span>Your course data is saved only on your computer. There is no account and no server.</span></div>
           <div><b>Remove it anytime</b><span>“Sign out and clear data” in Settings deletes your sign-in and everything the app saved.</span></div>
@@ -299,7 +415,7 @@
     <section class="block" id="download">
       <div class="wrap">
         <h2>Download Carmen Planner</h2>
-        <p class="sub">Free. Version <span class="ver">1.0</span>. Want to look around first? Open the app and choose “Try it with sample courses”.</p>
+        <p class="sub">Free. Version <span class="ver">1.1</span>. Want to look around first? Open the app and choose “Try it with sample courses”.</p>
         <div class="steps">
           <div class="os-card" id="card-mac">
             <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.2zM14 5.1c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5z"/></svg>Mac</h3>
@@ -326,6 +442,19 @@
       </div>
     </section>
 
+    <section class="block" id="safe">
+      <div class="wrap">
+        <h2>Why does my computer show a warning?</h2>
+        <p class="sub">Apple and Microsoft show a warning for any app that isn’t signed with a paid developer certificate. It doesn’t mean the app found a problem. Carmen Planner is a free student project, so it isn’t signed yet.</p>
+        <div class="privacy">
+          <div><b>All the code is public</b><span>Anyone can read exactly what the app does on <a class="gh-link" href="#">GitHub</a>. The installers are built from that code by GitHub’s own servers, not on a personal computer.</span></div>
+          <div><b>You can check the file</b><span>Each download has a SHA-256 fingerprint listed on the <a class="rel-link" href="#">release page</a>, so you can confirm the file wasn’t changed.</span></div>
+          <div><b>It only talks to Carmen</b><span>The app connects only to Ohio State’s Carmen and to GitHub to check for updates. No AI service, no tracking, nothing else.</span></div>
+          <div><b>Updates are announced in the app</b><span>When a new version is out, the app shows a notice with a download button. Install it over the old one and your settings stay.</span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="block" id="how">
       <div class="wrap">
         <h2>How I built it with AI</h2>
@@ -334,6 +463,9 @@
           <div><b>From a website to an app</b><p>I first pictured a website, but a website can’t sign in to Carmen for you. So it became a desktop app with its own Carmen sign-in window.</p></div>
           <div><b>Fixing the plan</b><p>The first plan crammed exam prep into the night before, because small homework filled the early days. Now exams and projects get time reserved first.</p></div>
           <div><b>Testing with screenshots</b><p>Claude ran the app, looked at screenshots, and fixed what looked wrong, like cut-off names and overcrowded days.</p></div>
+          <div><b>“This is a mess”</b><p>The first syllabus summary copied calendar rows and repeated the same rule three times, and the office hours were vague. I said so, with screenshots, and we rebuilt it until it read like a person had summarized it.</p></div>
+          <div><b>Keeping it free</b><p>The weekly brief started on a paid AI, then free ChatGPT by copy and paste, then Gemini with a free key. None was simple enough, so now the app writes the brief itself, for free, on your computer.</p></div>
+          <div><b>Cutting what didn’t work</b><p>I also tried a mind map of lecture notes built from the slides. It wasn’t good enough, so I removed it and kept the app focused on what it does well.</p></div>
         </div>
       </div>
     </section>
@@ -361,6 +493,7 @@
       var MAC = latest + 'Carmen-Planner-mac-universal.dmg';
       var WIN = latest + 'Carmen-Planner-win-x64.exe';
       document.querySelectorAll('.gh-link').forEach(function (a) { a.href = gh; });
+      document.querySelectorAll('.rel-link').forEach(function (a) { a.href = gh + '/releases/latest'; });
       document.querySelectorAll('#download .dl-mac').forEach(function (a) { a.href = MAC; });
       document.querySelectorAll('#download .dl-win').forEach(function (a) { a.href = WIN; });
 
